@@ -1,0 +1,63 @@
+﻿Group,Infection Rate,Lower Limit,Upper Limit,Scale,Point Est Method,CI Method,Num Pools,Num Pos Pools,Num Individuals,County,week,year
+6/9/21,0,0,2.57,"1,000",MLE,Score,59,0,1431,Suffolk,23,2021
+6/15/21,0,0,1.02,"1,000",MLE,Score,80,0,3658,Suffolk,24,2021
+6/22/21,0,0,1.06,"1,000",MLE,Score,78,0,3536,Suffolk,25,2021
+6/30/21,0,0,1.42,"1,000",MLE,Score,74,0,2614,Suffolk,26,2021
+7/7/21,0,0,1.18,"1,000",MLE,Score,74,0,3164,Suffolk,27,2021
+7/8/21,0,0,20.32,"1,000",MLE,Score,7,0,139,Erie,27,2021
+7/13/21,0.65,0.12,2.14,"1,000",Bias Corrected MLE,Corrected Score,85,2,3106,Suffolk,28,2021
+7/20/21,0.76,0.04,3.68,"1,000",Bias Corrected MLE,Corrected Score,52,1,1308,Suffolk,29,2021
+7/21/21,0,0,48.62,"1,000",MLE,Score,2,0,43,Erie,29,2021
+7/22/21,0,0,4.33,"1,000",MLE,Score,19,0,800,Erie,29,2021
+7/27/21,2.16,0.89,4.46,"1,000",Bias Corrected MLE,Corrected Score,78,6,2845,Suffolk,30,2021
+7/29/21,0,0,10.53,"1,000",MLE,Score,14,0,308,Erie,30,2021
+8/3/21,3.41,1.41,7.06,"1,000",Bias Corrected MLE,Corrected Score,64,6,1832,Suffolk,31,2021
+8/4/21,0,0,6.96,"1,000",MLE,Score,17,0,486,Erie,31,2021
+8/10/21,6.3,2.97,11.96,"1,000",Bias Corrected MLE,Corrected Score,57,8,1373,Suffolk,32,2021
+8/11/21,0,0,10.39,"1,000",MLE,Score,9,0,300,Erie,32,2021
+8/17/21,11.33,7.9,15.94,"1,000",Bias Corrected MLE,Corrected Score,83,32,3679,Suffolk,33,2021
+8/18/21,0,0,10.27,"1,000",MLE,Score,11,0,308,Erie,33,2021
+8/24/21,8.84,5.07,14.55,"1,000",Bias Corrected MLE,Corrected Score,66,14,1828,Suffolk,34,2021
+8/25/21,2.51,0.15,12.57,"1,000",Bias Corrected MLE,Corrected Score,13,1,404,Erie,34,2021
+8/31/21,17.59,11.09,27.01,"1,000",Bias Corrected MLE,Corrected Score,57,20,1474,Suffolk,35,2021
+9/1/21,0,0,6.8,"1,000",MLE,Score,19,0,503,Erie,35,2021
+9/8/21,9.59,3.96,20.06,"1,000",Bias Corrected MLE,Corrected Score,38,6,685,Suffolk,36,2021
+9/14/21,13.18,5.52,27.2,"1,000",Bias Corrected MLE,Corrected Score,29,6,492,Suffolk,37,2021
+9/15/21,4.18,0.26,20.07,"1,000",Bias Corrected MLE,Corrected Score,11,1,229,Erie,37,2021
+9/22/21,5.84,2.22,12.85,"1,000",Bias Corrected MLE,Corrected Score,39,5,897,Suffolk,38,2021
+9/28/21,8.78,1.6,29.75,"1,000",Bias Corrected MLE,Corrected Score,12,2,245,Erie,39,2021
+9/28/21,0,0,10.07,"1,000",MLE,Score,20,0,340,Suffolk,39,2021
+10/5/21,0,0,22.24,"1,000",MLE,Score,11,0,144,Suffolk,40,2021
+10/6/21,0,0,44.5,"1,000",MLE,Score,6,0,65,Erie,40,2021
+10/13/21,0,0,38.52,"1,000",MLE,Score,7,0,77,Suffolk,41,2021
+10/20/21,0,0,38.89,"1,000",MLE,Score,6,0,74,Erie,42,2021
+6/7/22,0,0,7.04,"1,000",MLE,Score,28,0,504,Suffolk,23,2022
+6/14/22,0,0,3.96,"1,000",MLE,Score,39,0,909,Suffolk,24,2022
+6/22/22,0,0,1.52,"1,000",MLE,Score,70,0,2440,Suffolk,25,2022
+6/29/22,0,0,3.1,"1,000",MLE,Score,47,0,1177,Suffolk,26,2022
+7/6/22,0,0,1.79,"1,000",MLE,Score,60,0,2063,Suffolk,27,2022
+7/12/22,0,0,1.8,"1,000",MLE,Score,59,0,2056,Suffolk,28,2022
+7/19/22,0,0,3.18,"1,000",MLE,Score,44,0,1142,Suffolk,29,2022
+7/20/22,0,0,3.03,"1,000",MLE,Score,31,0,1181,Erie,29,2022
+7/26/22,2.81,1.53,4.77,"1,000",Bias Corrected MLE,Corrected Score,89,12,4572,Suffolk,30,2022
+7/27/22,0,0,3.95,"1,000",MLE,Score,25,0,892,Erie,30,2022
+8/2/22,15.58,10.38,22.94,"1,000",Bias Corrected MLE,Corrected Score,59,26,2345,Suffolk,31,2022
+8/3/22,1.93,0.35,6.39,"1,000",Bias Corrected MLE,Corrected Score,29,2,1065,Erie,31,2022
+8/10/22,3.72,1.22,9.06,"1,000",Bias Corrected MLE,Corrected Score,27,4,1152,Erie,32,2022
+8/11/22,7.5,4.17,12.65,"1,000",Bias Corrected MLE,Corrected Score,63,13,2035,Suffolk,32,2022
+8/17/22,4.97,2.05,10.44,"1,000",Bias Corrected MLE,Corrected Score,32,6,1338,Erie,33,2022
+8/17/22,5.35,2.38,10.64,"1,000",Bias Corrected MLE,Corrected Score,44,7,1435,Suffolk,33,2022
+8/23/22,12.35,5.79,23.87,"1,000",Bias Corrected MLE,Corrected Score,32,8,768,Suffolk,34,2022
+8/24/22,5.16,1.94,11.55,"1,000",Bias Corrected MLE,Corrected Score,26,5,1065,Erie,34,2022
+8/31/22,10.54,5.02,20.18,"1,000",Bias Corrected MLE,Corrected Score,27,8,891,Erie,35,2022
+9/7/22,8.96,2.96,21.91,"1,000",Bias Corrected MLE,Corrected Score,19,4,497,Erie,36,2022
+9/7/22,13.81,6.82,25.88,"1,000",Bias Corrected MLE,Corrected Score,30,9,811,Suffolk,36,2022
+9/14/22,2.66,0.16,12.91,"1,000",Bias Corrected MLE,Corrected Score,18,1,372,Erie,37,2022
+9/14/22,15.19,7.18,29.58,"1,000",Bias Corrected MLE,Corrected Score,25,8,664,Suffolk,37,2022
+9/20/22,8.67,3.59,18.18,"1,000",Bias Corrected MLE,Corrected Score,34,6,772,Suffolk,38,2022
+9/21/22,4.37,0.26,21.24,"1,000",Bias Corrected MLE,Corrected Score,17,1,228,Erie,38,2022
+9/27/22,10.43,3.3,26.81,"1,000",Bias Corrected MLE,Corrected Score,19,4,473,Suffolk,39,2022
+9/28/22,0,0,7.73,"1,000",MLE,Score,23,0,447,Erie,39,2022
+10/5/22,5.02,0.31,24,"1,000",Bias Corrected MLE,Corrected Score,10,1,188,Suffolk,40,2022
+10/12/22,0,0,17.83,"1,000",MLE,Score,5,0,140,Suffolk,41,2022
+10/19/22,0,0,10.06,"1,000",MLE,,,,,Erie,42,2022
