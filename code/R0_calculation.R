@@ -3,6 +3,9 @@
 library('R2jags')
 library('MCMCvis')
 library('coda')
+library('scales')
+
+setwd("/Users/cruzloya/git/NY2pop/code")
 
 # Relative R0 parametrization as in Eq. (A2) in Shocket et al. 
 # (removing N and r).
@@ -73,9 +76,12 @@ a.alb.curves <-  apply(a.alb.chains, 1, function(x) quad(temps, x[1], x[2], x[3]
 
 # Vector competence (from Shocket et al)
 load("jagsout_bc_CpipWNV_inf.Rdata")
-bc.CpipWNV.out.inf$BUGSoutput$summary
+bc.CpipWNV.out.inf$BUGSoutput$summary[1:4, ]
 bc.chains <- MCMCchains(bc.CpipWNV.out.inf, params=c("cf.T0", "cf.Tm", "cf.q"))
 rm(bc.CpipWNV.out.inf)
+
+#bc.CpipWNV.out.inf$BUGSoutput
+
 
 bc.curves <- apply(bc.chains, 1, function(x) quad(temps, x[1], x[2], x[3]))
 head(bc.chains)
@@ -97,7 +103,7 @@ lf.alb.curves <- apply(lf.alb.chains, 1, function(x) linear_lim(temps, x[1], x[2
 
 # Pathogen development rate (from Shocket et al)
 load("jagsout_PDR_CpipWNV_inf.Rdata")
-
+PDR.CpipWNV.out.inf$BUGSoutput$summary[1:4, ]
 PDR.chains <- MCMCchains(PDR.CpipWNV.out.inf, params=c("cf.T0", "cf.Tm", "cf.q"))
 rm(PDR.CpipWNV.out.inf)
 
@@ -135,6 +141,7 @@ pO.alb.curves <- apply(pO.alb.chains, 1, function(x) quad_lim(temps, x[1], x[2],
 
 # Egg viability (from Shocket et al)
 load("jagsout_EV_Cpip_inf.Rdata")
+EV.Cpip.out.inf$BUGSoutput$summary[1:4, ]
 EV.chains <- MCMCchains(EV.Cpip.out.inf, params=c("cf.T0", "cf.Tm", "cf.q"))
 rm(EV.Cpip.out.inf)
 
@@ -214,15 +221,54 @@ find_Topt <- function(temps, curves) {
   return(temps[idx])
 }
 
-# Find optimal temperature.
-R0.suf.Topt <- find_Topt(temps, R0.suf.curves)
-R0.alb.Topt <- find_Topt(temps, R0.alb.curves)
+?which.min
+find_Tmin <- function(temps, curves) {
+  idx <- apply(curves, 2, function(x) which(x > 0)[1] - 1)
+  return(temps[idx])
+}
 
+find_Tmax <- function(temps, curves) {
+  idx <- apply(curves, 2, function(x) tail(which(x > 0), 1) + 1)
+  return(temps[idx])
+}
+
+
+?which
+
+# Find optimal min and max temperature.
+R0.suf.Topt <- find_Topt(temps, R0.suf.curves)
+R0.suf.Tmin <- find_Tmin(temps, R0.suf.curves)
+R0.suf.Tmax <- find_Tmax(temps, R0.suf.curves)
+
+R0.alb.Topt <- find_Topt(temps, R0.alb.curves)
+R0.alb.Tmin <- find_Tmin(temps, R0.alb.curves)
+R0.alb.Tmax <- find_Tmax(temps, R0.alb.curves)
+
+print("Downstate")
+print("Topt")
 print(mean(R0.suf.Topt))
 print(quantile(R0.suf.Topt, c(0.025, 0.975)))
 
+print("Tmin")
+print(mean(R0.suf.Tmin))
+print(quantile(R0.suf.Tmin, c(0.025, 0.975)))
+
+print("Tmax")
+print(mean(R0.suf.Tmax))
+print(quantile(R0.suf.Tmax, c(0.025, 0.975)))
+
+print("Upstate")
+print("Topt")
 print(mean(R0.alb.Topt))
 print(quantile(R0.alb.Topt, c(0.025, 0.975)))
+
+print("Tmin")
+print(mean(R0.alb.Tmin))
+print(quantile(R0.alb.Tmin, c(0.025, 0.975)))
+
+print("Tmax")
+print(mean(R0.alb.Tmax))
+print(quantile(R0.alb.Tmax, c(0.025, 0.975)))
 
 saveRDS(R0.suf.curves, file="R0_chains_suffolk.RDS")
 saveRDS(R0.alb.curves, file="R0_chains_albany.RDS")

@@ -1,6 +1,7 @@
 library('R2jags')
 library('MCMCvis')
 library('scales')
+library('Hmisc')
 
 # Relative R0 parametrization as in Eq. (A2) in Shocket et al. 
 # (removing N and r).
@@ -45,7 +46,7 @@ suffolk.col <- "#CC79A7"
 albany.col <- "#56B4E9"
   
 
-plot_points_errbar <- function(data.mean.suf, data.stderr.suf, mean.alb, stderr.alb, 
+plot_points_errbar <- function(data.mean.suf, data.stderr.suf, data.mean.alb, data.stderr.alb, 
                                xlim=c(0, 45), ylim=c(0, 1), main="Trait",
                                xlab="Temperature [°C]", ylab="trait",
                                errbar.length=0.06, errbar.width=2,
@@ -58,15 +59,12 @@ plot_points_errbar <- function(data.mean.suf, data.stderr.suf, mean.alb, stderr.
   arrows(c(22,25,28), data.mean.suf, y1=data.mean.suf-data.sderr.suf, col=suffolk.col,
          angle=90, length=errbar.length, lwd=errbar.width)
   
-  
   points(c(22,25,28), data.mean.alb, pch=20, col=albany.col,
          cex=cex)
   arrows(c(22,25,28), data.mean.alb, y1=data.mean.alb+data.sderr.alb, col=albany.col,
          angle=90, length=errbar.length, lwd=errbar.width)
   arrows(c(22,25,28), data.mean.alb, y1=data.mean.alb-data.sderr.alb, col=albany.col,
          angle=90, length=errbar.length, lwd=errbar.width)
-  
-  
 }
 
 
@@ -125,8 +123,8 @@ a.alb.chains <- readRDS("jagsout_a_albany.RDS")
 a.suf.chains
 a.alb.chains
 
-View(a.suf.chains$BUGSoutput$summary[c(2,1,3,4), c(1,3,7,8,9)])
-View(a.alb.chains$BUGSoutput$summary[c(2,1,3,4), c(1,3,7,8,9)])
+#View(a.suf.chains$BUGSoutput$summary[c(2,1,3,4), c(1,3,7,8,9)])
+#View(a.alb.chains$BUGSoutput$summary[c(2,1,3,4), c(1,3,7,8,9)])
 
 # Only keep chains for TPC model parameters.
 a.suf.chains <- MCMCchains(a.suf.chains, params=c("Tmin", "Tmax", "c"))
@@ -165,8 +163,8 @@ data.albany <- subset(data, (data$population == "albany"))
 lf.suf.chains <- readRDS("jagsout_lf_suffolk.RDS")
 lf.alb.chains <- readRDS("jagsout_lf_albany.RDS")
 
-View(lf.suf.chains$BUGSoutput$summary[c(5,1,6, 3), c(1,3,7,8,9)])
-View(lf.alb.chains$BUGSoutput$summary[c(5,1,6, 3), c(1,3,7,8,9)])
+#View(lf.suf.chains$BUGSoutput$summary[c(5,1,6, 3), c(1,3,7,8,9)])
+#View(lf.alb.chains$BUGSoutput$summary[c(5,1,6, 3), c(1,3,7,8,9)])
 
 lf.suf.chains <- MCMCchains(lf.suf.chains, params=c("m", "b"))
 lf.alb.chains <- MCMCchains(lf.alb.chains, params=c("m", "b"))
@@ -214,8 +212,8 @@ data.albany <- subset(data, (data$population == "albany"))
 ER.suf.chains <- readRDS("jagsout_epr_suffolk.RDS")
 ER.alb.chains <- readRDS("jagsout_epr_albany.RDS")
 
-View(ER.suf.chains$BUGSoutput$summary[c(2,1,3,4,6), c(1,3,7,8,9)])
-View(ER.alb.chains$BUGSoutput$summary[c(2,1,3,4,6), c(1,3,7,8,9)])
+#View(ER.suf.chains$BUGSoutput$summary[c(2,1,3,4,6), c(1,3,7,8,9)])
+#View(ER.alb.chains$BUGSoutput$summary[c(2,1,3,4,6), c(1,3,7,8,9)])
 
 ER.suf.chains <- MCMCchains(ER.suf.chains, params=c("Tmin", "Tmax", "c"))
 ER.alb.chains <- MCMCchains(ER.alb.chains, params=c("Tmin", "Tmax", "c"))
@@ -262,8 +260,8 @@ data.albany <- subset(data, (data$population == "albany"))
 pO.suf.chains <- readRDS("jagsout_pO_suffolk.RDS")
 pO.alb.chains <- readRDS("jagsout_pO_albany.RDS")
 
-View(pO.suf.chains$BUGSoutput$summary[c(2,1,3,4), c(1,3,7,8,9)])
-View(pO.alb.chains$BUGSoutput$summary[c(2,1,3,4), c(1,3,7,8,9)])
+#View(pO.suf.chains$BUGSoutput$summary[c(2,1,3,4), c(1,3,7,8,9)])
+#View(pO.alb.chains$BUGSoutput$summary[c(2,1,3,4), c(1,3,7,8,9)])
 
 pO.suf.chains <- MCMCchains(pO.suf.chains, params=c("Tmin", "Tmax", "c"))
 pO.alb.chains <- MCMCchains(pO.alb.chains, params=c("Tmin", "Tmax", "c"))
@@ -298,8 +296,8 @@ data.albany <- subset(data, (data$population == "albany"))
 pLA.suf.chains <- readRDS("jagsout_pLA_suffolk.RDS")
 pLA.alb.chains <- readRDS("jagsout_pLA_albany.RDS")
 
-View(pLA.suf.chains$BUGSoutput$summary[c(2,1,3,4), c(1,3,7,8,9)])
-View(pLA.alb.chains$BUGSoutput$summary[c(2,1,3,4), c(1,3,7,8,9)])
+#View(pLA.suf.chains$BUGSoutput$summary[c(2,1,3,4), c(1,3,7,8,9)])
+#View(pLA.alb.chains$BUGSoutput$summary[c(2,1,3,4), c(1,3,7,8,9)])
 
 pLA.suf.chains <- MCMCchains(pLA.suf.chains, params=c("Tmin", "Tmax", "c"))
 pLA.alb.chains <- MCMCchains(pLA.alb.chains, params=c("Tmin", "Tmax", "c"))
@@ -335,8 +333,8 @@ MDR.alb.chains <- readRDS("jagsout_MDR_albany.RDS")
 
 MDR.suf.chains
 MDR.alb.chains
-View(MDR.suf.chains$BUGSoutput$summary[c(2,1,3,5,7,4), c(1,3,7,8,9)])
-View(MDR.alb.chains$BUGSoutput$summary[c(2,1,3,5,7,4), c(1,3,7,8,9)])
+#View(MDR.suf.chains$BUGSoutput$summary[c(2,1,3,5,7,4), c(1,3,7,8,9)])
+#View(MDR.alb.chains$BUGSoutput$summary[c(2,1,3,5,7,4), c(1,3,7,8,9)])
 
 MDR.suf.chains <- MCMCchains(MDR.suf.chains, params=c("Tmin", "Tmax", "c"))
 MDR.alb.chains <- MCMCchains(MDR.alb.chains, params=c("Tmin", "Tmax", "c"))
@@ -407,15 +405,26 @@ erie.22 <- merge(erie.weather.22.weekly, erie.mosq.22, by=c("week"))
 suffolk.22$lagged.tmeanc <- Lag(suffolk.22$tmeanc, shift=2)
 erie.22$lagged.tmeanc <- Lag(erie.22$tmeanc, shift=2)
 
-plot(suffolk.22$lagged.tmeanc, suffolk.22$Infection.Rate, pch=20, col=suffolk.col,
+plot(suffolk.22$lagged.tmeanc, suffolk.22$Infection.Rate, pch=15, col="darkred",
      xlab="Temperature [ºC]", ylab="WNV prevalence",  xlim = c(10, 35), ylim=c(0, 20),
      main="")
-points(erie.22$lagged.tmeanc, erie.22$Infection.Rate, pch=20, col=erie.col)
+
+
+R0.suf.curves <- readRDS("R0_chains_suffolk.RDS")
+R0.alb.curves <- readRDS("R0_chains_albany.RDS")
+points(erie.22$lagged.tmeanc, erie.22$Infection.Rate, pch=15, col="steelblue")
 plot_curves_shaded(temps, R0.suf.curves, R0.alb.curves, scale.factor=20, shade.alpha=0.2)
 
-length(temps)
-dim(R0.suf.curves)
 
-plot_curves_shaded(temps, meancurve.suf, CI.suf, meancurve.alb, CI.alb,
-                   scale.factor=20, shade.alpha=0.2)
-getwd()
+## Save mean and CIs for R0 for map plotting.
+R0.suf.mean <- apply(R0.suf.curves, 1, mean)
+R0.suf.CI <- apply(R0.suf.curves, 1, quantile, c(0.025, 0.975))
+
+saveRDS(R0.suf.mean, "R0_mean_suffolk.RDS")
+saveRDS(R0.suf.CI, "R0_CI_suffolk.RDS")
+
+R0.alb.mean <- apply(R0.alb.curves, 1, mean)
+R0.alb.CI <- apply(R0.alb.curves, 1, quantile, c(0.025, 0.975))
+
+saveRDS(R0.alb.mean, "R0_mean_albany.RDS")
+saveRDS(R0.alb.CI, "R0_CI_albany.RDS")

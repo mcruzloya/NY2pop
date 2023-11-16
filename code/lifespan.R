@@ -1,4 +1,3 @@
-# Linear model for lifespan with prior on Tmax rather than the intercept.
 set.seed(42) # Set seed for reproducibility.
 
 library('R2jags')

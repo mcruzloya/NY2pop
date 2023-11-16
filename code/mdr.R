@@ -76,6 +76,7 @@ cat("
     ")
 sink()
 
+##### Sets initial values of MCMC chains (set randomly so chains have different starting values).
 inits<-function(){list(
   c_ = runif(1, min=1, max=5),
   Tmax = runif(1, min=35, max=40),
