@@ -405,16 +405,21 @@ erie.22 <- merge(erie.weather.22.weekly, erie.mosq.22, by=c("week"))
 suffolk.22$lagged.tmeanc <- Lag(suffolk.22$tmeanc, shift=2)
 erie.22$lagged.tmeanc <- Lag(erie.22$tmeanc, shift=2)
 
-plot(suffolk.22$lagged.tmeanc, suffolk.22$Infection.Rate, pch=15, col="darkred",
+plot(suffolk.22$lagged.tmeanc, suffolk.22$Infection.Rate, pch=15, col=suffolk.col,
      xlab="Temperature [ºC]", ylab="WNV prevalence",  xlim = c(10, 35), ylim=c(0, 20),
      main="")
 
 
 R0.suf.curves <- readRDS("R0_chains_suffolk.RDS")
 R0.alb.curves <- readRDS("R0_chains_albany.RDS")
-points(erie.22$lagged.tmeanc, erie.22$Infection.Rate, pch=15, col="steelblue")
+points(erie.22$lagged.tmeanc, erie.22$Infection.Rate, pch=15, col=erie.col)
 plot_curves_shaded(temps, R0.suf.curves, R0.alb.curves, scale.factor=20, shade.alpha=0.2)
 
+# Plot individual R0 curves.
+plot("", 
+     xlab="Temperature [ºC]", ylab="Relative R0",  xlim = c(10, 35), ylim=c(0, 1),
+     main="")
+plot_curves_shaded(temps, R0.suf.curves, R0.alb.curves, scale.factor=1, shade.alpha=0.2)
 
 ## Save mean and CIs for R0 for map plotting.
 R0.suf.mean <- apply(R0.suf.curves, 1, mean)

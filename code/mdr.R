@@ -17,10 +17,12 @@ data.suffolk <- subset(data, (data$population == "suffolk"))
 data.albany <- subset(data, (data$population == "albany"))
 
 data.suffolk
-plot(data.suffolk$temperature, 1 / data.suffolk$days.to.pupation, 
+plot(data.suffolk$temperature, 1 / 
+data.suffolk$days.to.emergence, 
      xlim=c(10, 35), ylim=c(0, 0.2),
      pch=20, main="Suffolk")
-plot(data.albany$temperature, 1 / data.albany$days.to.pupation, xlim=c(10, 35), ylim=c(0, 0.2),
+plot(data.albany$temperature, 1 / 
+data.albany$days.to.emergence, xlim=c(10, 35), ylim=c(0, 0.2),
      pch=20, main="Albany")
 
 suffolk.col <- "#CC79A7"
@@ -28,7 +30,7 @@ albany.col <- "#56B4E9"
 
 
 # Visualize data.
-g <- (ggplot(data, aes(temperature, 1 / days.to.pupation)) +  
+g <- (ggplot(data, aes(temperature, 1 / days.to.emergence)) +  
         geom_violin(aes(col=population, group=cut_width(temperature, 1))) + 
         geom_point(aes(col=population, alpha=I(0.3))) +
         facet_wrap(~population, nrow=1) +
@@ -95,7 +97,7 @@ nt <- 8 # thinning rate - jags saves every nt iterations in each chain
 nc <- 3 # number of chains
 
 ##### Organize Data for JAGS
-trait <- data.suffolk$days.to.pupation
+trait <- data.suffolk$days.to.emergence
 N.obs <- length(trait)
 temp <- data.suffolk$temperature
 
@@ -119,7 +121,8 @@ curves <- apply(chains.suffolk, 1, function(x) briere(temps, x[1], x[2], x[3]))
 meancurve.suf <- apply(curves, 1, mean)
 CI.suf <- apply(curves, 1, quantile, c(0.025, 0.975))
 
-plot(data.suffolk$temperature, 1 / data.suffolk$days.to.pupation, 
+plot(data.suffolk$temperature, 1 / 
+data.suffolk$days.to.emergence, 
      xlab="Temperature [°C]",
      ylab="MDR", xlim=c(0, 45), ylim=c(0, 0.2), pch=20, 
      col=alpha(suffolk.col, 0.3),
@@ -129,7 +132,7 @@ lines(temps, CI.suf[1,], col="gray")
 lines(temps, CI.suf[2,], col="gray")
 
 ## Albany analysis
-trait <- data.albany$days.to.pupation
+trait <- data.albany$days.to.emergence
 N.obs <- length(trait)
 temp <- data.albany$temperature
 
@@ -153,7 +156,8 @@ curves <- apply(chains.albany, 1, function(x) briere(temps, x[1], x[2], x[3]))
 meancurve.alb <- apply(curves, 1, mean)
 CI.alb <- apply(curves, 1, quantile, c(0.025, 0.975))
 
-plot(data.albany$temperature, 1 / data.albany$days.to.pupation, xlab="Temperature [°C]",
+plot(data.albany$temperature, 1 / 
+data.albany$days.to.emergence, xlab="Temperature [°C]",
      ylab="MDR", xlim=c(0, 45), ylim=c(0, 0.2), pch=20, 
      col=alpha(albany.col, 0.3),
      main="Albany")
@@ -162,7 +166,8 @@ lines(temps, CI.alb[1,], col="gray")
 lines(temps, CI.alb[2,], col="gray")
 
 # Plot both curves simultaneously.
-plot(data.suffolk$temperature, 1 / data.suffolk$days.to.pupation, 
+plot(data.suffolk$temperature, 1 / 
+data.suffolk$days.to.emergence, 
      xlab="Temperature [°C]",
      ylab="MDR [1 / day]", xlim=c(0, 45), ylim=c(0, 0.2), pch=20, 
      col=alpha(suffolk.col, 0.3),
@@ -171,38 +176,69 @@ lines(temps, meancurve.suf, col=suffolk.col)
 lines(temps, CI.suf[1,], col=alpha(suffolk.col, 0.5))
 lines(temps, CI.suf[2,], col=alpha(suffolk.col, 0.5))
 
-points(data.albany$temperature, 1 / data.albany$days.to.pupation, pch=20,
+points(data.albany$temperature, 1 / 
+data.albany$days.to.emergence, pch=20,
        col=alpha(albany.col, 0.3) )
 lines(temps, meancurve.alb, col=albany.col)
 lines(temps, CI.alb[1,], col=alpha(albany.col, 0.5))
 lines(temps, CI.alb[2,], col=alpha(albany.col, 0.5))
 
-data.mean.suf <- c(mean(1 / data.suffolk$days.to.pupation[data.suffolk$temperature == 22]),
-                   mean(1 / data.suffolk$days.to.pupation[data.suffolk$temperature == 25]),
-                   mean(1 / data.suffolk$days.to.pupation[data.suffolk$temperature == 28]))
-data.sd.suf <- c(sd(1 / data.suffolk$days.to.pupation[data.suffolk$temperature == 22]),
-                 sd(1 / data.suffolk$days.to.pupation[data.suffolk$temperature == 25]),
-                 sd(1 / data.suffolk$days.to.pupation[data.suffolk$temperature == 28]))
+data.mean.suf <- c(mean(1 / 
+data.suffolk$days.to.emergence[data.suffolk$temperature == 
+22]),
+                   mean(1 / 
+data.suffolk$days.to.emergence[data.suffolk$temperature == 
+25]),
+                   mean(1 / 
+data.suffolk$days.to.emergence[data.suffolk$temperature == 
+28]))
+data.sd.suf <- c(sd(1 / 
+data.suffolk$days.to.emergence[data.suffolk$temperature == 
+22]),
+                 sd(1 / 
+data.suffolk$days.to.emergence[data.suffolk$temperature == 
+25]),
+                 sd(1 / 
+data.suffolk$days.to.emergence[data.suffolk$temperature == 
+28]))
 data.sderr.suf <- data.sd.suf / sqrt(c(length(data.suffolk$temperature == 22),
                                        length(data.suffolk$temperature == 25),
                                        length(data.suffolk$temperature == 28)))
 
-data.mean.suf <- c(mean(1 / data.suffolk$days.to.pupation[data.suffolk$temperature == 22]),
-                   mean(1 / data.suffolk$days.to.pupation[data.suffolk$temperature == 25]),
-                   mean(1 / data.suffolk$days.to.pupation[data.suffolk$temperature == 28]))
-data.sd.suf <- c(sd(1 / data.suffolk$days.to.pupation[data.suffolk$temperature == 22]),
-                 sd(1 / data.suffolk$days.to.pupation[data.suffolk$temperature == 25]),
-                 sd(1 / data.suffolk$days.to.pupation[data.suffolk$temperature == 28]))
+data.mean.suf <- c(mean(1 / 
+data.suffolk$days.to.emergence[data.suffolk$temperature == 
+22]),
+                   mean(1 / 
+data.suffolk$days.to.emergence[data.suffolk$temperature == 
+25]),
+                   mean(1 / 
+data.suffolk$days.to.emergence[data.suffolk$temperature == 
+28]))
+data.sd.suf <- c(sd(1 / 
+data.suffolk$days.to.emergence[data.suffolk$temperature == 
+22]),
+                 sd(1 / 
+data.suffolk$days.to.emergence[data.suffolk$temperature == 
+25]),
+                 sd(1 / 
+data.suffolk$days.to.emergence[data.suffolk$temperature == 
+28]))
 data.sderr.suf <- data.sd.suf / sqrt(c(length(data.suffolk$temperature == 22),
                                        length(data.suffolk$temperature == 25),
                                        length(data.suffolk$temperature == 28)))
 
-data.mean.alb <- c(mean(1 / data.albany$days.to.pupation[data.albany$temperature == 22]),
-                   mean(1 / data.albany$days.to.pupation[data.albany$temperature == 25]),
-                   mean(1 / data.albany$days.to.pupation[data.albany$temperature == 28]))
-data.sd.alb <- c(sd(1 / data.albany$days.to.pupation[data.albany$temperature == 22]),
-                 sd(1 / data.albany$days.to.pupation[data.albany$temperature == 25]),
-                 sd(1 / data.albany$days.to.pupation[data.albany$temperature == 28]))
+data.mean.alb <- c(mean(1 / 
+data.albany$days.to.emergence[data.albany$temperature == 22]),
+                   mean(1 / 
+data.albany$days.to.emergence[data.albany$temperature == 25]),
+                   mean(1 / 
+data.albany$days.to.emergence[data.albany$temperature == 28]))
+data.sd.alb <- c(sd(1 / 
+data.albany$days.to.emergence[data.albany$temperature == 22]),
+                 sd(1 / 
+data.albany$days.to.emergence[data.albany$temperature == 25]),
+                 sd(1 / 
+data.albany$days.to.emergence[data.albany$temperature == 28]))
 data.sderr.alb <- data.sd.alb / sqrt(c(length(data.albany$temperature == 22),
                                        length(data.albany$temperature == 25),
                                        length(data.albany$temperature == 28)))

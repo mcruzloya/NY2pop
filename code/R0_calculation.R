@@ -270,6 +270,18 @@ print("Tmax")
 print(mean(R0.alb.Tmax))
 print(quantile(R0.alb.Tmax, c(0.025, 0.975)))
 
+
+hist(R0.suf.Topt - R0.alb.Topt)
+print("Pr(Topt.suf > Topt.alb)")
+
+## Posterior probabilities that R0 downstate Topt is greater than upstate
+## by at least X degrees Celsius.
+sum((R0.suf.Topt - R0.alb.Topt > 0)) / length(R0.suf.Topt - R0.alb.Topt)
+sum((R0.suf.Topt - R0.alb.Topt > 0.5)) / length(R0.suf.Topt - R0.alb.Topt)
+sum((R0.suf.Topt - R0.alb.Topt > 1)) / length(R0.suf.Topt - R0.alb.Topt)
+sum((R0.suf.Topt - R0.alb.Topt > 2)) / length(R0.suf.Topt - R0.alb.Topt)
+sum((R0.suf.Topt - R0.alb.Topt > 3)) / length(R0.suf.Topt - R0.alb.Topt)
+
 saveRDS(R0.suf.curves, file="R0_chains_suffolk.RDS")
 saveRDS(R0.alb.curves, file="R0_chains_albany.RDS")
 
